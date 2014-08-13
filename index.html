@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=1024" />
+   <meta name="apple-mobile-web-app-capable" content="yes" />
+   <title>Shiny Regression Toy</title>
+   <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+   <meta name="author" content="Ian Donaldson" />
+   <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+   <link href="libraries/frameworks/impressjs/css/impress-demo.css" rel="stylesheet" />
+   <link rel="shortcut icon" href="libraries/frameworks/impressjs/favicon.png" />
+   <link rel="apple-touch-icon" href="libraries/frameworks/impressjs/apple-touch-icon.png" />
+   <link href="libraries/highlighters/highlight.js/css/tomorrow.css" rel="stylesheet" />   <link rel="stylesheet" href = "assets/css/ribbons.css">
+
+</head>
+<body class="impress-not-supported">
+  <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are   
+      presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> 
+      browser.</p>
+  </div>
+  <div id="impress">
+    
+    <div id="slide-1" class="step slide" 
+  data-x="0" data-y="0"  
+   
+    
+    
+    data-scale="2">
+ 
+ <p><q>Shiny Regression Toy</q></p>
+
+<h1> A talk powered by slidify and impress.js</h1>
+
+<p><br>
+<br></p>
+
+<h1>Ian Donaldson</h1>
+
+<p><h6>Medium-sized data scientist</p>
+
+</div>
+<div id="tryit" class="step " 
+  data-x="2500" data-y="-500" data-z="-500" 
+   
+    
+    
+    data-scale="1">
+ 
+ <!-- this should be a comment-->
+
+<p>Shiny regression toy is a <strong>toy</strong> application that can help users explore R&#39;s linear regression function &quot;lm&quot;.
+<br>
+You can play with it here: <a href="http://iandonaldson.shinyapps.io/shinyRegressionToy/">http://iandonaldson.shinyapps.io/shinyRegressionToy/</a>
+<br></p>
+
+<ul class = "build incremental">
+<li>Follow the instructions in the &quot;instructions&quot;&quot; tab</li>
+<li>Click on the &quot;model&quot; tab to view the results</li>
+</ul>
+
+</div>
+<div id="code" class="step " 
+  data-x="2500" data-y="500" data-z="-500" 
+   
+    
+    
+    data-scale="1">
+ 
+ <p>This app was written using shiny and demonstrates the use of tabs and the reactive generation of graphs.
+<br>
+You can get the code from <a href="https://github.com/iandonaldson/shinyRegressionToy">github</a>
+<br>
+Here&#39;s a screen shot.  Notice the input panel on the left and the multiple tabs to the right.</p>
+
+</div>
+<div id="screen-shot" class="step " 
+  data-x="4000" data-y="0"  
+   
+    
+    
+    data-scale="2">
+ 
+ <p><img src="./assets/img/shinyRegressionToy.png"></p>
+
+</div>
+<div id="step1" class="step " 
+  data-x="0" data-y="1500" data-z="0" 
+   
+    
+    
+   >
+ 
+ <p><b>The guts of the code.</b>  <br>
+First, a set of X values is generated using mean and standard deviation input from the user.<br></p>
+
+</div>
+<div id="step1a" class="step slide" 
+  data-x="0" data-y="2000" data-z="0" 
+   
+    
+    
+   >
+ 
+ <pre><code class="r">x &lt;- rnorm(n=10, mean=0, sd=5)
+x[1:5]
+</code></pre>
+
+<pre><code>## [1] -3.7025  2.0737 -0.9527  4.7393 -0.9957
+</code></pre>
+
+</div>
+<div id="step2" class="step " 
+  data-x="2000" data-y="1500" data-z="0" 
+   
+    
+    
+   >
+ 
+ <p>Second, a set of y values is generated using the x values and the slope and intercept of a linear relation chosen by the user.  Standard deviation of an added error is also specified by the user.</p>
+
+</div>
+<div id="step2a" class="step slide" 
+  data-x="2000" data-y="2000"  
+   
+    
+    
+    data-scale="0.4">
+ 
+ <pre><code class="r">slope &lt;- 1
+intercept &lt;- 0
+error &lt;- rnorm(n=length(x), mean=0, sd=1)
+y &lt;- slope * x + intercept + error
+y[1:5]
+</code></pre>
+
+<pre><code>## [1] -3.512  2.674 -1.031  5.946 -1.025
+</code></pre>
+
+</div>
+<div id="step3" class="step " 
+  data-x="4000" data-y="1500" data-z="0" 
+   
+    
+    
+   >
+ 
+ <p>Finally, the set of X and Y points are plotted and used as input to the lm function to generate a linear model.<br>
+The slope and intercept values calculated by lm will be similar but not identical to the slope and intercept chosen by the user.</p>
+
+</div>
+<div id="step3b" class="step slide" 
+  data-x="4000" data-y="2500" data-z="0" 
+   
+    
+    
+   >
+ 
+ <pre><code class="r">  xy &lt;- as.data.frame(cbind(x,y))
+  fit &lt;- lm(y~x, data=xy)
+  plot(xy)   
+  abline(fit, col=&quot;red&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-3.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+</div>
+<div id="step3c" class="step slide" 
+  data-x="4000" data-y="3500" data-z="0" 
+   
+    
+    
+   >
+ 
+ <pre><code class="r">#show the coefficients of the model
+fit
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x, data = xy)
+## 
+## Coefficients:
+## (Intercept)            x  
+##       0.597        1.076
+</code></pre>
+
+</div>
+<div id="ov" class="step " 
+  data-x="2000" data-y="0" data-z="5000" 
+   
+    
+    
+    data-scale="3">
+ <h1>Lastly, I just want to point out that this whole presentation is really on just one slide ;-)<br> Thanks for watching.</h1>
+ <p><a href="http://iandonaldson.shinyapps.io/shinyRegressionToy/">Shiny Regression Toy</a></p>
+
+</div>
+<div id="done" class="step " 
+  data-x="" data-y=""  
+   
+    
+    
+   >
+ 
+ 
+</div>
+ 
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+  </div>
+
+  <div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+  </div>
+  
+  <div style="position: fixed; bottom: 10px; left: 10px; pointer-events: auto;">
+    <iframe src="http://ghbtns.com/github-btn.html?user=iandonaldson&repo=shinyRegressionToy&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+  <iframe src="http://ghbtns.com/github-btn.html?user=iandonaldson&repo=shinyRegressionToy&&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-text="try shinyRegressionToy" 
+    data-url="http://www.slidify.org">  
+  </a>
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  </div>
+  </body>
+ <script>
+  if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+  }
+ </script>
+ <script src="libraries/frameworks/impressjs/js/impress.js"></script>
+ <script>impress().init();</script>
+ <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+ <script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     tex2jax: {
+       inlineMath: [['$','$'], ['\\(','\\)']],
+       processEscapes: true
+     }
+   });
+ </script>
+ <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+ </script> -->
+ <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+ <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+ <script>hljs.initHighlightingOnLoad();</script>
+ <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+  
+ </html>

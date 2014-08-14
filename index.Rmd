@@ -96,7 +96,10 @@ fit
 [Shiny Regression Toy](http://iandonaldson.shinyapps.io/shinyRegressionToy/)
 
 
---- #done
+--- #done 
+publish_github("iandonaldson", "shinyRegressionToy")
+
+https://github.com/iandonaldson/shinyRegressionToy
 
 
 
